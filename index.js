@@ -1,8 +1,11 @@
 const acorn = require('acorn');
 const walk = require('acorn-walk');
-
+const webtreemaptree = require('webtreemap/build/tree.js');
+const webtreemap = require('webtreemap/build/treemap.js');
 const fs = require('fs');
-const jsSource = fs.readFileSync('./test/mol-adverts.pretty.js');
+
+const filename = './test/mol-adverts.pretty.js'
+const jsSource = fs.readFileSync(filename);
 
 console.log('\n\n\n\n\n');
 console.log('walking');
@@ -83,9 +86,32 @@ sorted.forEach(node => {
   }
 });
 
-fs.writeFileSync('treendoes.json', JSON.stringify(tree, null, 2), 'utf8');
+webtreemaptree.sort(tree);
 
+fs.writeFileSync('treenodes.json', JSON.stringify(tree, null, 2), 'utf8');
+console.log('wrote treenodes.json');
 
+function makeTreemap() {
+    const output = `<!doctype html>
+<title>treemap of ${filename}</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+#treemap {
+  width: 800px;
+  height: 600px;
+}
+</style>
+<div id='treemap'></div>
+<script>const data = ${JSON.stringify(tree)}</script>
+<script>${fs.readFileSync(require.resolve('webtreemap/dist/webtreemap.js'))}</script>
+<script>webtreemap.render(document.getElementById("treemap"), data, {});</script>
+`;
+  fs.writeFileSync('treemap.html', output, 'utf8');
+  console.log('wrote treemap.html');
+}
+makeTreemap();
 
 
 function findLast(arr, pred) {
