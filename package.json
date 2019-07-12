@@ -1,0 +1,18 @@
+{
+  "name": "sourcesnapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/acorn": "^4.0.5",
+    "acorn": "^6.2.0",
+    "acorn-walk": "^6.2.0",
+    "webtreemap": "^2.0.1"
+  }
+}
