@@ -12,7 +12,6 @@ console.log('walking');
 
 const ast = acorn.parse(jsSource);
 const total = ast.end - ast.start;
-// console.log(JSON.stringify(ast, null, 2));
 
 // fs.writeFileSync('simple.ast.json', JSON.stringify(ast, null, 2));
 
