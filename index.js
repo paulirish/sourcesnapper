@@ -10,13 +10,13 @@ const jsSource = fs.readFileSync(filename);
 console.log('\n\n\n\n\n');
 console.log('walking');
 
-const ast = acorn.parse(jsSource);
-const total = ast.end - ast.start;
+const moduleFuncs = new Set();
 
 // fs.writeFileSync('simple.ast.json', JSON.stringify(ast, null, 2));
 
+const ast = acorn.parse(jsSource);
+const total = ast.end - ast.start;
 const moduleDictCandidates = new Set();
-const moduleFuncs = new Set();
 
 walk.ancestor(ast, {
   FunctionExpression(node, ancestors) {
@@ -36,7 +36,6 @@ walk.ancestor(ast, {
     if (isInArrayWithinAnObjLiteral) moduleDictCandidates.add(ancestors.slice(-4)[0]);
   },
 });
-
 
 const moduleDicts = Array.from(moduleDictCandidates).filter(dict => {
   const isBig = dict.end - dict.start > 30 * 1024;
