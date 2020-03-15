@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/acorn": "^4.0.5",
-    "acorn": "^6.2.0",
+    "acorn": "^6.4.1",
     "acorn-walk": "^6.2.0",
     "webtreemap": "^2.0.1"
   }
