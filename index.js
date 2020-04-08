@@ -18,6 +18,36 @@ const ast = acorn.parse(jsSource);
 const total = ast.end - ast.start;
 const moduleDictCandidates = new Set();
 
+/*
+
+
+
+
+
+
+
+
+
+
+
+The latest version of this is in https://github.com/paulirish/bundle-inspector/blob/treemap/src/lib/treemap.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/ 
+
+
 walk.ancestor(ast, {
   FunctionExpression(node, ancestors) {
     const isWithinAnObjLiteral =
